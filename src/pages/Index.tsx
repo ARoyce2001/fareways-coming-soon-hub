@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import BookingDemo from '@/components/BookingDemo';
 import DestinationCarousel from '@/components/DestinationCarousel';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -28,16 +29,38 @@ const Index = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Welcome to the journey! 🎉",
-      description: "You're now on our exclusive early access list. We'll notify you when we launch!",
-    });
-    
-    setEmail('');
-    setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from('email_signups')
+        .insert([{ email }]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already on the list! 🎉",
+            description: "This email is already signed up for early access.",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Welcome to the journey! 🎉",
+          description: "You're now on our exclusive early access list. We'll notify you when we launch!",
+        });
+      }
+      
+      setEmail('');
+    } catch (error) {
+      console.error('Error saving email:', error);
+      toast({
+        title: "Oops! Something went wrong",
+        description: "Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const openBlog = () => {
@@ -58,8 +81,14 @@ const Index = () => {
           loop
           playsInline
           className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error('Video failed to load:', e);
+            // Fallback to a gradient background if video fails
+            e.currentTarget.style.display = 'none';
+          }}
         >
-          <source src="https://player.vimeo.com/external/467313530.hd.mp4?s=65f7a0a8e0e5ae8b5a1e6e1e8e8e8e8e" type="video/mp4" />
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
       </div>
