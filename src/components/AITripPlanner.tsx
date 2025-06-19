@@ -235,7 +235,7 @@ const AITripPlanner = () => {
 
         {/* Enhanced Sample Output */}
         <Card className={`bg-black/30 backdrop-blur-md border-white/20 shadow-2xl transition-all duration-500 ${
-          showItinerary ? 'animate-fade-in' : 'opacity-50'
+          showItinerary ? 'animate-fade-in' : 'opacity-75'
         }`}>
           <CardHeader>
             <CardTitle className="text-white text-xl flex items-center gap-2">
