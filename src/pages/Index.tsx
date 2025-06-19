@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X, Plane, Calendar, MapPin, Users, Mail, Shield, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,14 +16,7 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const { toast } = useToast();
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,21 +68,6 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Calculate central logo transform based on scroll
-  const centralLogoTransform = () => {
-    const maxScroll = 300;
-    const scrollProgress = Math.min(scrollY / maxScroll, 1);
-    const scale = 1 - (scrollProgress * 0.6); // Shrink from 1 to 0.4
-    const opacity = 1 - (scrollProgress * 0.5); // Fade from 1 to 0.5
-    const translateX = scrollProgress * 200; // Move right
-    
-    return {
-      transform: `scale(${scale}) translateX(${translateX}px)`,
-      opacity: opacity,
-      transition: 'all 0.3s ease-out'
-    };
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 font-inter">
       {/* Video Background with Enhanced Overlay */}
@@ -98,7 +77,7 @@ const Index = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover brightness-40"
+          className="w-full h-full object-cover brightness-30"
           onError={(e) => {
             console.error('Video failed to load:', e);
             e.currentTarget.style.display = 'none';
@@ -109,53 +88,31 @@ const Index = () => {
           Your browser does not support the video tag.
         </video>
         {/* Enhanced dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/95"></div>
       </div>
 
       {/* Fixed Top-Left Logo + Wordmark */}
       <div className="fixed top-6 left-6 z-50">
         <button 
           onClick={scrollToTop}
-          className="flex items-center space-x-3 p-3 bg-black/50 backdrop-blur-md rounded-xl border border-white/20 hover:bg-black/60 transition-all duration-300 shadow-2xl"
+          className="flex items-center space-x-4 p-4 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 hover:bg-black/70 transition-all duration-300 shadow-2xl"
         >
           <img 
             src="/lovable-uploads/0d4fb254-658e-4908-b874-6cbe4908a7fc.png" 
             alt="CheapFareways Logo" 
-            className="h-8 w-8 md:h-10 md:w-10"
+            className="h-10 w-10 md:h-12 md:w-12"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
               e.currentTarget.nextElementSibling?.classList.remove('hidden');
             }}
           />
           {/* Fallback icon */}
-          <Plane className="h-8 w-8 text-blue-400 hidden" />
+          <Plane className="h-10 w-10 text-blue-400 hidden" />
           <div className="text-white">
-            <div className="font-bold text-lg md:text-xl leading-tight">CheapFareways</div>
-            <div className="text-xs md:text-sm text-gray-300 font-medium">.com</div>
+            <div className="font-bold text-xl md:text-2xl leading-tight">CheapFareways</div>
+            <div className="text-sm md:text-base text-gray-300 font-medium">.com</div>
           </div>
         </button>
-      </div>
-
-      {/* Central Floating Logo with Scroll Animation */}
-      <div 
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none"
-        style={centralLogoTransform()}
-      >
-        <div className="flex items-center justify-center p-6 bg-black/30 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl">
-          <img 
-            src="/lovable-uploads/0d4fb254-658e-4908-b874-6cbe4908a7fc.png" 
-            alt="CheapFareways Central Logo" 
-            className="h-16 w-16 md:h-20 md:w-20"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-              e.currentTarget.nextElementSibling?.classList.remove('hidden');
-            }}
-          />
-          {/* Fallback */}
-          <div className="hidden">
-            <Plane className="h-16 w-16 md:h-20 md:w-20 text-blue-400" />
-          </div>
-        </div>
       </div>
 
       {/* Enhanced Navigation - Top Right */}
@@ -323,7 +280,7 @@ const Index = () => {
               </p>
               <div className="flex items-center space-x-2 text-gray-400">
                 <Mail className="h-4 w-4" />
-                <span>contact@cheapfareways.com</span>
+                <span>info@cheapfareways.com</span>
               </div>
             </div>
 
@@ -364,7 +321,7 @@ const Index = () => {
 
           <div className="border-t border-white/20 mt-12 pt-8 text-center">
             <p className="text-gray-500 text-sm">
-              © 2024 CheapFareways. All rights reserved. | Launching soon for India's smart travelers.
+              © 2025 CheapFareways. All rights reserved. | Launching soon for India's smart travelers.
             </p>
           </div>
         </div>

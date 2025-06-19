@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const BookingDemo = () => {
   const [activeTab, setActiveTab] = useState('flights');
@@ -43,7 +44,7 @@ const BookingDemo = () => {
           </TabsList>
 
           <TabsContent value="flights" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">From</label>
                 <div className="relative">
@@ -69,10 +70,10 @@ const BookingDemo = () => {
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Departure</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
                   <Input
                     type="date"
-                    className="pl-10 bg-white/20 border-white/30 text-white"
+                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
               </div>
@@ -80,12 +81,33 @@ const BookingDemo = () => {
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Return</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
                   <Input
                     type="date"
-                    className="pl-10 bg-white/20 border-white/30 text-white"
+                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Passengers</label>
+                <Select>
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-gray-400" />
+                      <SelectValue placeholder="1 Adult" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 Adult</SelectItem>
+                    <SelectItem value="2">2 Adults</SelectItem>
+                    <SelectItem value="3">3 Adults</SelectItem>
+                    <SelectItem value="4">4 Adults</SelectItem>
+                    <SelectItem value="1-child">1 Adult, 1 Child</SelectItem>
+                    <SelectItem value="2-child">2 Adults, 1 Child</SelectItem>
+                    <SelectItem value="family">2 Adults, 2 Children</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </TabsContent>
@@ -106,10 +128,10 @@ const BookingDemo = () => {
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Check-in</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
                   <Input
                     type="date"
-                    className="pl-10 bg-white/20 border-white/30 text-white"
+                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
               </div>
@@ -117,10 +139,10 @@ const BookingDemo = () => {
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Check-out</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
                   <Input
                     type="date"
-                    className="pl-10 bg-white/20 border-white/30 text-white"
+                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
               </div>
