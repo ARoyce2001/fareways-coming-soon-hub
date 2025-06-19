@@ -10,7 +10,7 @@ const destinations = [
     title: "Fly to Bangkok",
     subtitle: "Direct from ₹15,999",
     description: "Explore Thailand's vibrant capital",
-    image: "https://images.unsplash.com/photo-1563492065-08baeb5d2ca7?w=800&h=600&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1552550018-5253c1b171e1?w=800&h=600&fit=crop&crop=center",
     gradient: "from-orange-500/80 to-red-600/80"
   },
   {
@@ -26,7 +26,7 @@ const destinations = [
     title: "Discover Paris",
     subtitle: "From ₹45,999",
     description: "City of lights awaits",
-    image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=800&h=600&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&h=600&fit=crop&crop=center",
     gradient: "from-pink-500/80 to-rose-600/80"
   },
   {
