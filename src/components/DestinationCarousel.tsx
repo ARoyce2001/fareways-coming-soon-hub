@@ -26,7 +26,7 @@ const destinations = [
     title: "Discover Paris",
     subtitle: "From ₹45,999",
     description: "City of lights awaits",
-    image: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&h=600&fit=crop&crop=center",
+    image: "https://images.unsplash.com/photo-1551634979-2b11f8c946fe?w=800&h=600&fit=crop&crop=center",
     gradient: "from-pink-500/80 to-rose-600/80"
   },
   {
