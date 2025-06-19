@@ -8,7 +8,7 @@ const destinations = [
   {
     id: 1,
     title: "Fly to Bangkok",
-    subtitle: "Direct from ₹5,999",
+    subtitle: "Direct from ₹15,999",
     description: "Explore Thailand's vibrant capital",
     image: "https://images.unsplash.com/photo-1563492065-08baeb5d2ca7?w=800&h=600&fit=crop&crop=center",
     gradient: "from-orange-500/80 to-red-600/80"
@@ -16,7 +16,7 @@ const destinations = [
   {
     id: 2,
     title: "Stay in Dubai",
-    subtitle: "Burj Khalifa views",
+    subtitle: "From ₹8,999/night",
     description: "Luxury meets innovation",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop&crop=center",
     gradient: "from-blue-500/80 to-purple-600/80"

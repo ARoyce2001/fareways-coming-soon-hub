@@ -83,7 +83,7 @@ const Index = () => {
             e.currentTarget.style.display = 'none';
           }}
         >
-          <source src="https://drive.google.com/uc?export=download&id=1DQrEJmwk92WC3VU2H6aq-KwFDiwK4phF" type="video/mp4" />
+          <source src="/videos/background.mp4" type="video/mp4" />
           <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -91,26 +91,27 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/95"></div>
       </div>
 
-      {/* Fixed Top-Left Logo + Wordmark */}
+      {/* Fixed Top-Left Logo + Wordmark - Updated Style */}
       <div className="fixed top-6 left-6 z-50">
         <button 
           onClick={scrollToTop}
-          className="flex items-center space-x-4 p-4 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 hover:bg-black/70 transition-all duration-300 shadow-2xl"
+          className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-300"
         >
           <img 
             src="/lovable-uploads/0d4fb254-658e-4908-b874-6cbe4908a7fc.png" 
             alt="CheapFareways Logo" 
-            className="h-10 w-10 md:h-12 md:w-12"
+            className="h-12 w-12 md:h-14 md:w-14"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
               e.currentTarget.nextElementSibling?.classList.remove('hidden');
             }}
           />
           {/* Fallback icon */}
-          <Plane className="h-10 w-10 text-blue-400 hidden" />
+          <Plane className="h-12 w-12 text-blue-400 hidden" />
           <div className="text-white">
-            <div className="font-bold text-xl md:text-2xl leading-tight">CheapFareways</div>
-            <div className="text-sm md:text-base text-gray-300 font-medium">.com</div>
+            <div className="font-bold text-xl md:text-2xl leading-tight">
+              CheapFareways<span className="text-gray-300">.com</span>
+            </div>
           </div>
         </button>
       </div>

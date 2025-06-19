@@ -6,9 +6,17 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const BookingDemo = () => {
   const [activeTab, setActiveTab] = useState('flights');
+  const [departureDate, setDepartureDate] = useState<Date>();
+  const [returnDate, setReturnDate] = useState<Date>();
+  const [checkInDate, setCheckInDate] = useState<Date>();
+  const [checkOutDate, setCheckOutDate] = useState<Date>();
 
   const handleSearch = () => {
     // Non-functional demo search
@@ -69,24 +77,56 @@ const BookingDemo = () => {
 
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Departure</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                  <Input
-                    type="date"
-                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                  />
-                </div>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !departureDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {departureDate ? format(departureDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={departureDate}
+                      onSelect={setDepartureDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Return</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                  <Input
-                    type="date"
-                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                  />
-                </div>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !returnDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {returnDate ? format(returnDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={returnDate}
+                      onSelect={setReturnDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
@@ -98,7 +138,7 @@ const BookingDemo = () => {
                       <SelectValue placeholder="1 Adult" />
                     </div>
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="1">1 Adult</SelectItem>
                     <SelectItem value="2">2 Adults</SelectItem>
                     <SelectItem value="3">3 Adults</SelectItem>
@@ -127,24 +167,56 @@ const BookingDemo = () => {
 
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Check-in</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                  <Input
-                    type="date"
-                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                  />
-                </div>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !checkInDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {checkInDate ? format(checkInDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={checkInDate}
+                      onSelect={setCheckInDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
                 <label className="text-white text-sm font-medium">Check-out</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
-                  <Input
-                    type="date"
-                    className="pl-10 pr-4 bg-white/20 border-white/30 text-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                  />
-                </div>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !checkOutDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {checkOutDate ? format(checkOutDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={checkOutDate}
+                      onSelect={setCheckOutDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
