@@ -83,52 +83,89 @@ const Index = () => {
           className="w-full h-full object-cover"
           onError={(e) => {
             console.error('Video failed to load:', e);
-            // Fallback to a gradient background if video fails
             e.currentTarget.style.display = 'none';
           }}
         >
+          <source src="https://sample-videos.com/zip/10/mp4/480/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
           <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-50 p-4 md:p-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-blue-400" />
-            <span className="text-2xl font-bold text-white">CheapFareways</span>
+      {/* Logo - Top Center */}
+      <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+        <button 
+          onClick={scrollToTop}
+          className="flex items-center justify-center p-3 bg-black/30 backdrop-blur-md rounded-xl border border-white/20 hover:bg-black/40 transition-all duration-300"
+        >
+          <img 
+            src="/lovable-uploads/c74e2a9a-2433-42c4-825e-39a29dd2d05d.png" 
+            alt="CheapFareways Logo" 
+            className="h-12 w-auto max-w-[200px] md:h-16 md:max-w-[250px]"
+            onError={(e) => {
+              // Fallback to text logo if image fails
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          {/* Fallback text logo */}
+          <div className="hidden">
+            <div className="flex items-center space-x-2">
+              <Plane className="h-8 w-8 text-blue-400" />
+              <span className="text-xl md:text-2xl font-bold text-white">CheapFareways</span>
+            </div>
           </div>
+        </button>
+      </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <button onClick={scrollToTop} className="text-white hover:text-blue-400 transition-colors">
-              Home
-            </button>
-            <button onClick={openBlog} className="text-white hover:text-blue-400 transition-colors">
-              Blog
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white"
+      {/* Navigation - Top Right */}
+      <nav className="fixed top-6 right-6 z-50">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/20 px-6 py-3">
+          <button 
+            onClick={scrollToTop} 
+            className="text-white hover:text-blue-400 transition-colors font-medium"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            Home
+          </button>
+          <div className="w-px h-4 bg-white/30"></div>
+          <button 
+            onClick={openBlog} 
+            className="text-white hover:text-blue-400 transition-colors font-medium"
+          >
+            Blog
           </button>
         </div>
 
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden bg-black/30 backdrop-blur-md rounded-xl border border-white/20 p-3 text-white"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md p-4">
-            <div className="flex flex-col space-y-4">
-              <button onClick={scrollToTop} className="text-white text-left hover:text-blue-400 transition-colors">
+          <div className="md:hidden absolute top-full right-0 mt-2 bg-black/90 backdrop-blur-md rounded-xl border border-white/20 p-4 min-w-[150px]">
+            <div className="flex flex-col space-y-3">
+              <button 
+                onClick={() => {
+                  scrollToTop();
+                  setIsMenuOpen(false);
+                }} 
+                className="text-white text-left hover:text-blue-400 transition-colors font-medium"
+              >
                 Home
               </button>
-              <button onClick={openBlog} className="text-white text-left hover:text-blue-400 transition-colors">
+              <button 
+                onClick={() => {
+                  openBlog();
+                  setIsMenuOpen(false);
+                }} 
+                className="text-white text-left hover:text-blue-400 transition-colors font-medium"
+              >
                 Blog
               </button>
             </div>
@@ -137,11 +174,11 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <main className="relative z-10 min-h-screen flex flex-col">
+      <main className="relative z-10 min-h-screen flex flex-col pt-24">
         <div 
           className="flex-1 flex items-center justify-center px-4 md:px-6"
           style={{
-            transform: `translateY(${scrollY * 0.5}px)`
+            transform: `translateY(${scrollY * 0.1}px)` // Reduced parallax effect
           }}
         >
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
@@ -159,7 +196,7 @@ const Index = () => {
             <CountdownTimer />
 
             {/* Email Capture */}
-            <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-md border-white/20 animate-scale-in">
+            <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-md border-white/20 animate-scale-in relative z-20">
               <CardContent className="p-6">
                 <form onSubmit={handleEmailSubmit} className="space-y-4">
                   <h3 className="text-white font-semibold text-lg">
@@ -193,7 +230,7 @@ const Index = () => {
       <section 
         className="relative z-10 py-20 px-4 md:px-6"
         style={{
-          transform: `translateY(${scrollY * 0.3}px)`
+          transform: `translateY(${scrollY * 0.05}px)` // Minimal parallax effect
         }}
       >
         <div className="max-w-4xl mx-auto">

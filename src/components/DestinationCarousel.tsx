@@ -10,7 +10,7 @@ const destinations = [
     title: "Fly to Bangkok",
     subtitle: "Direct from ₹5,999",
     description: "Explore Thailand's vibrant capital",
-    image: "https://images.unsplash.com/photo-1563492065-c4b7d8a2c0cb?w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=500&fit=crop&crop=center",
     gradient: "from-orange-500/80 to-red-600/80"
   },
   {
@@ -18,7 +18,7 @@ const destinations = [
     title: "Stay in Dubai",
     subtitle: "Burj Khalifa views",
     description: "Luxury meets innovation",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=500&fit=crop&crop=center",
     gradient: "from-blue-500/80 to-purple-600/80"
   },
   {
@@ -26,7 +26,7 @@ const destinations = [
     title: "Discover Paris",
     subtitle: "From ₹45,999",
     description: "City of lights awaits",
-    image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=800&h=500&fit=crop&crop=center",
     gradient: "from-pink-500/80 to-rose-600/80"
   },
   {
@@ -34,7 +34,7 @@ const destinations = [
     title: "Explore Tokyo",
     subtitle: "Starting ₹42,999",
     description: "Where tradition meets future",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&h=500&fit=crop&crop=center",
     gradient: "from-indigo-500/80 to-blue-600/80"
   },
   {
@@ -42,7 +42,7 @@ const destinations = [
     title: "Experience Santorini",
     subtitle: "From ₹38,999",
     description: "Greek island paradise",
-    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=500&fit=crop&crop=center",
     gradient: "from-blue-400/80 to-cyan-600/80"
   }
 ];
@@ -50,6 +50,7 @@ const destinations = [
 const DestinationCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [imageLoadErrors, setImageLoadErrors] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -76,6 +77,10 @@ const DestinationCarousel = () => {
     setIsAutoPlaying(false);
   };
 
+  const handleImageError = (destinationId: number) => {
+    setImageLoadErrors(prev => ({ ...prev, [destinationId]: true }));
+  };
+
   return (
     <div className="relative">
       {/* Main Carousel */}
@@ -89,11 +94,22 @@ const DestinationCarousel = () => {
               <Card className="bg-transparent border-none">
                 <CardContent className="p-0">
                   <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-2xl">
-                    <img
-                      src={destination.image}
-                      alt={destination.title}
-                      className="w-full h-full object-cover"
-                    />
+                    {!imageLoadErrors[destination.id] ? (
+                      <img
+                        src={destination.image}
+                        alt={destination.title}
+                        className="w-full h-full object-cover"
+                        onError={() => handleImageError(destination.id)}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <MapPin className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                          <p className="text-sm opacity-75">Loading destination image...</p>
+                        </div>
+                      </div>
+                    )}
                     <div className={`absolute inset-0 bg-gradient-to-r ${destination.gradient}`}></div>
                     
                     <div className="absolute inset-0 flex items-center justify-center text-center text-white p-8">
@@ -167,11 +183,17 @@ const DestinationCarousel = () => {
                 : 'hover:scale-105'
             }`}
           >
-            <img
-              src={destination.image}
-              alt={destination.title}
-              className="w-full h-full object-cover"
-            />
+            {!imageLoadErrors[destination.id] ? (
+              <img
+                src={destination.image}
+                alt={destination.title}
+                className="w-full h-full object-cover"
+                onError={() => handleImageError(destination.id)}
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-gray-600 to-gray-800"></div>
+            )}
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
               <span className="text-white text-xs font-semibold text-center px-2">
                 {destination.title.split(' ').slice(-1)[0]}
