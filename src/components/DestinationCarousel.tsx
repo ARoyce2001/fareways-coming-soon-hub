@@ -11,7 +11,7 @@ const destinations = [
     subtitle: "Direct from ₹15,999",
     description: "Explore Thailand's vibrant capital",
     image: "https://images.unsplash.com/photo-1552550018-5253c1b171e1?w=800&h=600&fit=crop&crop=center",
-    gradient: "from-orange-500/80 to-red-600/80"
+    gradient: "from-orange-500/20 to-red-600/20"
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const destinations = [
     subtitle: "From ₹8,999/night",
     description: "Luxury meets innovation",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop&crop=center",
-    gradient: "from-blue-500/80 to-purple-600/80"
+    gradient: "from-blue-500/20 to-purple-600/20"
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const destinations = [
     subtitle: "From ₹45,999",
     description: "City of lights awaits",
     image: "https://images.unsplash.com/photo-1551634979-2b11f8c946fe?w=800&h=600&fit=crop&crop=center",
-    gradient: "from-pink-500/80 to-rose-600/80"
+    gradient: "from-pink-500/20 to-rose-600/20"
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const destinations = [
     subtitle: "Starting ₹42,999",
     description: "Where tradition meets future",
     image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop&crop=center",
-    gradient: "from-indigo-500/80 to-blue-600/80"
+    gradient: "from-indigo-500/20 to-blue-600/20"
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const destinations = [
     subtitle: "From ₹38,999",
     description: "Greek island paradise",
     image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=600&fit=crop&crop=center",
-    gradient: "from-blue-400/80 to-cyan-600/80"
+    gradient: "from-blue-400/20 to-cyan-600/20"
   }
 ];
 
