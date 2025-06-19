@@ -17,16 +17,6 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const { toast } = useToast();
-  const [hideWordmark, setHideWordmark] = useState(false);
-
-useEffect(() => {
-  const handleScroll = () => {
-    setHideWordmark(window.scrollY > 50); // You can change 50 to adjust sensitivity
-  };
-
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
   
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,13 +108,13 @@ useEffect(() => {
           />
           {/* Fallback icon */}
           <Plane className="h-12 w-12 text-blue-400 hidden" />
-          <div 
-  className={`text-white transition-opacity duration-500 ${hideWordmark ? 'opacity-0' : 'opacity-100'}`}
->
-  <div className="font-extrabold text-4xl md:text-5xl text-white tracking-wide">
-    CheapFareways<span className="text-blue-400">.com</span>
-  </div>
-</div>
+                    <div className="text-white">
+            <div className="font-bold text-xl md:text-2xl leading-tight">
+              CheapFareways<span className="text-gray-300">.com</span>
+            </div>
+          </div>
+        </button>
+      </div>
 
       {/* Enhanced Navigation - Top Right */}
       <nav className="fixed top-6 right-6 z-50">
