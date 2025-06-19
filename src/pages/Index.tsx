@@ -88,7 +88,7 @@ const Index = () => {
           Your browser does not support the video tag.
         </video>
         {/* Enhanced dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
       </div>
 
       {/* Fixed Top-Left Logo + Wordmark - Updated Style */}
