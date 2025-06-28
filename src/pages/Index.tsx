@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Menu, X, Plane, Calendar, MapPin, Users, Mail, Shield, FileText } from 'lucide-react';
+import { Menu, X, Plane, Calendar, MapPin, Users, Mail, Shield, FileText, Instagram, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -64,6 +63,22 @@ const Index = () => {
     window.open('https://blog.cheapfareways.com/blog', '_blank');
   };
 
+  const openAboutUs = () => {
+    window.open('/about-us', '_blank');
+  };
+
+  const openInstagram = () => {
+    window.open('https://www.instagram.com/cheapfareways?igsh=MWtvejExejB5M29jcQ%3D%3D&utm_source=qr', '_blank');
+  };
+
+  const openFacebook = () => {
+    window.open('https://www.facebook.com/share/1CiprSimqA/?mibextid=wwXIfr', '_blank');
+  };
+
+  const openTwitter = () => {
+    window.open('https://x.com/cheapfareways?s=11', '_blank');
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -108,7 +123,7 @@ const Index = () => {
           />
           {/* Fallback icon */}
           <Plane className="h-12 w-12 text-blue-400 hidden" />
-                    <div className="text-white">
+          <div className="text-white">
             <div className="font-bold text-xl md:text-2xl leading-tight">
               CheapFareways<span className="text-gray-300">.com</span>
             </div>
@@ -125,6 +140,13 @@ const Index = () => {
             className="text-white hover:text-blue-400 transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/10"
           >
             Home
+          </button>
+          <div className="w-px h-4 bg-white/30"></div>
+          <button 
+            onClick={openAboutUs} 
+            className="text-white hover:text-blue-400 transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/10"
+          >
+            About Us
           </button>
           <div className="w-px h-4 bg-white/30"></div>
           <button 
@@ -155,6 +177,15 @@ const Index = () => {
                 className="text-white text-left hover:text-blue-400 transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/10"
               >
                 Home
+              </button>
+              <button 
+                onClick={() => {
+                  openAboutUs();
+                  setIsMenuOpen(false);
+                }} 
+                className="text-white text-left hover:text-blue-400 transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/10"
+              >
+                About Us
               </button>
               <button 
                 onClick={() => {
@@ -279,9 +310,37 @@ const Index = () => {
               <p className="text-gray-400 mb-4 max-w-md">
                 Revolutionizing travel booking with AI for Indian travelers. Get ready for smarter, faster, and more affordable travel deals.
               </p>
-              <div className="flex items-center space-x-2 text-gray-400">
+              <div className="flex items-center space-x-2 text-gray-400 mb-6">
                 <Mail className="h-4 w-4" />
                 <span>info@cheapfareways.com</span>
+              </div>
+              
+              {/* Social Media Icons */}
+              <div className="flex items-center space-x-4">
+                <span className="text-white font-medium">Follow Us:</span>
+                <button
+                  onClick={openInstagram}
+                  className="text-gray-400 hover:text-pink-400 transition-colors p-2 rounded-lg hover:bg-white/10"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={openFacebook}
+                  className="text-gray-400 hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-white/10"
+                  aria-label="Follow us on Facebook"
+                >
+                  <Facebook className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={openTwitter}
+                  className="text-gray-400 hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-white/10"
+                  aria-label="Follow us on X (Twitter)"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -294,6 +353,12 @@ const Index = () => {
                   className="block text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   Home
+                </button>
+                <button 
+                  onClick={openAboutUs}
+                  className="block text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  About Us
                 </button>
                 <button 
                   onClick={openBlog}

@@ -3,18 +3,17 @@ import { useState, useEffect } from 'react';
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
-    days: 60,
+    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
 
   useEffect(() => {
-    // Set launch date to 60 days from now
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 60);
+    // Set launch date to August 15th, 2025
+    const launchDate = new Date('August 15, 2025 00:00:00');
 
-    const timer = setInterval(() => {
+    const updateTimer = () => {
       const now = new Date().getTime();
       const distance = launchDate.getTime() - now;
 
@@ -25,8 +24,17 @@ const CountdownTimer = () => {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // If launch date has passed, set all to 0
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 1000);
+    };
+
+    // Update immediately
+    updateTimer();
+
+    // Set up interval to update every second
+    const timer = setInterval(updateTimer, 1000);
 
     return () => clearInterval(timer);
   }, []);
@@ -45,7 +53,7 @@ const CountdownTimer = () => {
   return (
     <div className="animate-slide-in-up">
       <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8">
-        Launching in
+        Launching on August 15th, 2025
       </h2>
       <div className="grid grid-cols-4 gap-4 max-w-md mx-auto">
         <TimeUnit value={timeLeft.days} label="Days" />
