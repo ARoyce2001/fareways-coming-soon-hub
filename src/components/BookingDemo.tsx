@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Plane, Hotel, Calendar, MapPin, Search, Users } from 'lucide-react';
+import { Plane, Hotel, Calendar, MapPin, Search, Users, Palmtree } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +17,8 @@ const BookingDemo = () => {
   const [returnDate, setReturnDate] = useState<Date>();
   const [checkInDate, setCheckInDate] = useState<Date>();
   const [checkOutDate, setCheckOutDate] = useState<Date>();
+  const [tripStartDate, setTripStartDate] = useState<Date>();
+  const [tripEndDate, setTripEndDate] = useState<Date>();
 
   const handleSearch = () => {
     // Non-functional demo search
@@ -34,7 +36,7 @@ const BookingDemo = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-white/20 border border-white/30">
+          <TabsList className="grid w-full grid-cols-3 bg-white/20 border border-white/30">
             <TabsTrigger 
               value="flights" 
               className="flex items-center space-x-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
@@ -48,6 +50,13 @@ const BookingDemo = () => {
             >
               <Hotel className="h-4 w-4" />
               <span>Hotels</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="holidays"
+              className="flex items-center space-x-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+            >
+              <Palmtree className="h-4 w-4" />
+              <span>Holidays</span>
             </TabsTrigger>
           </TabsList>
 
@@ -90,7 +99,7 @@ const BookingDemo = () => {
                       {departureDate ? format(departureDate, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
                     <CalendarComponent
                       mode="single"
                       selected={departureDate}
@@ -117,7 +126,7 @@ const BookingDemo = () => {
                       {returnDate ? format(returnDate, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
                     <CalendarComponent
                       mode="single"
                       selected={returnDate}
@@ -138,7 +147,7 @@ const BookingDemo = () => {
                       <SelectValue placeholder="1 Adult" />
                     </div>
                   </SelectTrigger>
-                  <SelectContent className="bg-white">
+                  <SelectContent className="bg-white z-50">
                     <SelectItem value="1">1 Adult</SelectItem>
                     <SelectItem value="2">2 Adults</SelectItem>
                     <SelectItem value="3">3 Adults</SelectItem>
@@ -180,7 +189,7 @@ const BookingDemo = () => {
                       {checkInDate ? format(checkInDate, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
                     <CalendarComponent
                       mode="single"
                       selected={checkInDate}
@@ -207,7 +216,7 @@ const BookingDemo = () => {
                       {checkOutDate ? format(checkOutDate, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
                     <CalendarComponent
                       mode="single"
                       selected={checkOutDate}
@@ -228,6 +237,119 @@ const BookingDemo = () => {
                     className="pl-10 bg-white/20 border-white/30 text-white placeholder-gray-300"
                   />
                 </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="holidays" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Destination</label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    placeholder="Kerala, India"
+                    className="pl-10 bg-white/20 border-white/30 text-white placeholder-gray-300"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Trip Start</label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !tripStartDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {tripStartDate ? format(tripStartDate, "PPP") : <span>Start date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={tripStartDate}
+                      onSelect={setTripStartDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Trip End</label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-white/20 border-white/30 text-white hover:bg-white/30",
+                        !tripEndDate && "text-gray-300"
+                      )}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {tripEndDate ? format(tripEndDate, "PPP") : <span>End date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white z-50" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={tripEndDate}
+                      onSelect={setTripEndDate}
+                      initialFocus
+                      className="p-3 pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Travelers</label>
+                <Select>
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-gray-400" />
+                      <SelectValue placeholder="2 Adults" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent className="bg-white z-50">
+                    <SelectItem value="1">1 Person</SelectItem>
+                    <SelectItem value="2">2 Adults</SelectItem>
+                    <SelectItem value="3">3 Adults</SelectItem>
+                    <SelectItem value="4">4 Adults</SelectItem>
+                    <SelectItem value="couple">Couple</SelectItem>
+                    <SelectItem value="family-small">Family (2+1)</SelectItem>
+                    <SelectItem value="family-large">Family (2+2)</SelectItem>
+                    <SelectItem value="group">Group (5+)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-white text-sm font-medium">Package Type</label>
+                <Select>
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                    <div className="flex items-center gap-2">
+                      <Palmtree className="h-4 w-4 text-gray-400" />
+                      <SelectValue placeholder="Adventure" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent className="bg-white z-50">
+                    <SelectItem value="adventure">Adventure</SelectItem>
+                    <SelectItem value="beach">Beach Holiday</SelectItem>
+                    <SelectItem value="cultural">Cultural Tour</SelectItem>
+                    <SelectItem value="romantic">Romantic Getaway</SelectItem>
+                    <SelectItem value="family">Family Package</SelectItem>
+                    <SelectItem value="luxury">Luxury Experience</SelectItem>
+                    <SelectItem value="budget">Budget Trip</SelectItem>
+                    <SelectItem value="wildlife">Wildlife Safari</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </TabsContent>
